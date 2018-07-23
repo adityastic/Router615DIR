@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Router615DIR</string>
     <string name="action_settings">Settings</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="jsonOfMacs">[{\"name\":\"Redmi 1S\",\"mac\":\"14:f6:5a:e9:90:00\"},{\"name\":\"Micromax A311\",\"mac\":\"3c:91:57:43:fa:38\"},{\"name\":\"Micromax E311\",\"mac\":\"80:6a:60:a8:aa:f0\"},{\"name\":\"Redmi Note 3(Ravindra)\",\"mac\":\"64:cc:2e:12:e1:d3\"},{\"name\":\"Moto G5 Plus(Ramesh)\",\"mac\":\"80:58:f8:37:16:44\"},{\"name\":\"Macbook Pro 2015(Aditya)\",\"mac\":\"a0:99:9b:17:43:7f\"},{\"name\":\"MITV4(Living Room)\",\"mac\":\"e0:37:bf:41:76:38\"},{\"name\":\"GalaxyS8+(Aditya)\",\"mac\":\"30:07:4d:87:2b:0b\"}]</string>
 </resources>

@@ -1,14 +1,13 @@
-package com.adityagupta.router615dir;
+package com.adityagupta.router615dir.webviewClients;
 
 import android.util.Log;
 import android.webkit.ValueCallback;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-/**
- * Created by maciek on 27.05.2016.
- */
-public class TesterWebViewClient extends WebViewClient {
+import com.adityagupta.router615dir.WebViewTester;
+
+public class QOSWebviewClient extends WebViewClient {
 
     public static final String LOGIN_URL = "http://192.168.0.1/login.htm";
     public static final String INDEX_URL = "http://192.168.0.1/index.htm";
@@ -36,7 +35,7 @@ public class TesterWebViewClient extends WebViewClient {
 
     private WebViewTester tester;
 
-    public TesterWebViewClient(int selected, TaskDone taskDone) {
+    public QOSWebviewClient(int selected, TaskDone taskDone) {
         tester = new WebViewTester();
         this.selected = selected;
         this.complete = false;
@@ -54,7 +53,7 @@ public class TesterWebViewClient extends WebViewClient {
                 public void run() {
                     tester.clickOnItemWithId("loginBtn");
                 }
-            }, 500);
+            }, 100);
         } else {
             if(!complete)
             {
@@ -66,7 +65,7 @@ public class TesterWebViewClient extends WebViewClient {
                                 public void run() {
                                     loadtrafficpage();
                                 }
-                            }, 500);
+                            }, 100);
                         } else if (TRAFFIC_CONTROL_URL.equals(url)) {
                             loadtime++;
                             Log.e("loadtime",loadtime+"");
@@ -88,7 +87,7 @@ public class TesterWebViewClient extends WebViewClient {
                                 public void run() {
                                     loadtrafficpage();
                                 }
-                            }, 500);
+                            }, 100);
                         } else if (TRAFFIC_CONTROL_URL.equals(url)) {
                             loadtime++;
                             Log.e("loadtime",loadtime+"");
@@ -110,7 +109,7 @@ public class TesterWebViewClient extends WebViewClient {
                                 public void run() {
                                     loadtrafficpage();
                                 }
-                            }, 500);
+                            }, 100);
                         } else if (TRAFFIC_CONTROL_URL.equals(url)) {
                             checkifruleexists(view);
                             complete = true;
@@ -132,7 +131,7 @@ public class TesterWebViewClient extends WebViewClient {
             public void run() {
                 tester.clickOnItemWithClassName("button");
             }
-        }, 500);
+        }, 100);
         view.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -144,11 +143,11 @@ public class TesterWebViewClient extends WebViewClient {
                 tester.setValueForItemWithName("uprateFloor", "1");
                 tester.setValueForItemWithName("uprateCeiling", "400");
                 tester.setValueForItemWithName("downrateFloor", "1");
-                tester.setValueForItemWithName("downrateCeiling", "4096");
+                tester.setValueForItemWithName("downrateCeiling", "6144");
                 tester.clickOnItemWithName("addRule");
                 taskDone.onTaskComplete();
             }
-        }, 600);
+        }, 100);
     }
 
     private void setTrafficRuleto32(WebView view) {
@@ -157,7 +156,7 @@ public class TesterWebViewClient extends WebViewClient {
             public void run() {
                 tester.clickOnItemWithClassName("button");
             }
-        }, 500);
+        }, 100);
         view.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -169,11 +168,11 @@ public class TesterWebViewClient extends WebViewClient {
                 tester.setValueForItemWithName("uprateFloor", "1");
                 tester.setValueForItemWithName("uprateCeiling", "400");
                 tester.setValueForItemWithName("downrateFloor", "1");
-                tester.setValueForItemWithName("downrateCeiling", "4096");
+                tester.setValueForItemWithName("downrateCeiling", "6144");
                 tester.clickOnItemWithName("addRule");
                 taskDone.onTaskComplete();
             }
-        }, 600);
+        }, 100);
     }
 
     private void loadJQuery(WebView view) {
@@ -204,7 +203,7 @@ public class TesterWebViewClient extends WebViewClient {
     }
 
     public void checkifruleexists(final WebView view, final onCheckRuleExists onCheckRuleExists) {
-        loadJQuery(view);
+//        loadJQuery(view);
         view.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -222,11 +221,11 @@ public class TesterWebViewClient extends WebViewClient {
                             }
                         });
             }
-        }, 1200);
+        }, 100);
     }
 
     public void checkifruleexists(final WebView view) {
-        loadJQuery(view);
+//        loadJQuery(view);
         view.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -243,12 +242,13 @@ public class TesterWebViewClient extends WebViewClient {
                             }
                         });
             }
-        }, 1200);
+        }, 100);
     }
 
     public interface TaskDone
     {
         public void onTaskComplete();
+        public void onTaskFailed();
     }
     public interface onCheckRuleExists
     {

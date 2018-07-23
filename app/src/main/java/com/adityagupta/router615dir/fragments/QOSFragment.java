@@ -1,23 +1,25 @@
-package com.adityagupta.router615dir;
+package com.adityagupta.router615dir.fragments;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.webkit.CookieManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 
-import static com.adityagupta.router615dir.TesterWebViewClient.INDEX_URL;
-import static com.adityagupta.router615dir.TesterWebViewClient.LOGIN_URL;
+import com.adityagupta.router615dir.R;
+import com.adityagupta.router615dir.webviewClients.QOSWebviewClient;
 
-public class MainActivity extends AppCompatActivity {
+import static com.adityagupta.router615dir.webviewClients.QOSWebviewClient.LOGIN_URL;
+
+
+public class QOSFragment extends Fragment {
 
     private WebView webView;
 
@@ -25,15 +27,20 @@ public class MainActivity extends AppCompatActivity {
     TextView output;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_qos, container, false);
+    }
 
-        webView = (WebView) findViewById(R.id.webView);
-        tv = findViewById(R.id.tv_button);
-        gaming = findViewById(R.id.gaming_button);
-        output = findViewById(R.id.output);
-        clearall = findViewById(R.id.clearall);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        webView = (WebView) view.findViewById(R.id.webView);
+        tv = view.findViewById(R.id.tv_button);
+        gaming = view.findViewById(R.id.gaming_button);
+        output = view.findViewById(R.id.output);
+        clearall = view.findViewById(R.id.clearall);
 
         webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webView.getSettings().setSaveFormData(false);
@@ -49,10 +56,15 @@ public class MainActivity extends AppCompatActivity {
                 CookieManager.getInstance().removeAllCookies(null);
                 CookieManager.getInstance().flush();
                 webView.getSettings().setJavaScriptEnabled(true);
-                webView.setWebViewClient(new TesterWebViewClient(2, new TesterWebViewClient.TaskDone() {
+                webView.setWebViewClient(new QOSWebviewClient(2, new QOSWebviewClient.TaskDone() {
                     @Override
                     public void onTaskComplete() {
                         output.setText("Lag Fixed");
+                    }
+
+                    @Override
+                    public void onTaskFailed() {
+
                     }
                 }));
                 webView.loadUrl(LOGIN_URL);
@@ -66,10 +78,15 @@ public class MainActivity extends AppCompatActivity {
                 CookieManager.getInstance().removeAllCookies(null);
                 CookieManager.getInstance().flush();
                 webView.getSettings().setJavaScriptEnabled(true);
-                webView.setWebViewClient(new TesterWebViewClient(1, new TesterWebViewClient.TaskDone() {
+                webView.setWebViewClient(new QOSWebviewClient(1, new QOSWebviewClient.TaskDone() {
                     @Override
                     public void onTaskComplete() {
                         output.setText("Lag Fixed");
+                    }
+
+                    @Override
+                    public void onTaskFailed() {
+
                     }
                 }));
                 webView.loadUrl(LOGIN_URL);
@@ -83,14 +100,24 @@ public class MainActivity extends AppCompatActivity {
                 CookieManager.getInstance().removeAllCookies(null);
                 CookieManager.getInstance().flush();
                 webView.getSettings().setJavaScriptEnabled(true);
-                webView.setWebViewClient(new TesterWebViewClient(3, new TesterWebViewClient.TaskDone() {
+                webView.setWebViewClient(new QOSWebviewClient(3, new QOSWebviewClient.TaskDone() {
                     @Override
                     public void onTaskComplete() {
                         output.setText("ClearedAll");
+                    }
+
+                    @Override
+                    public void onTaskFailed() {
+
                     }
                 }));
                 webView.loadUrl(LOGIN_URL);
             }
         });
+    }
+
+    public static Fragment newInstance() {
+        return new QOSFragment();
+
     }
 }
