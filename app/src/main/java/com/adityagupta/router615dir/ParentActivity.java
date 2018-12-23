@@ -13,6 +13,7 @@ import com.adityagupta.router615dir.adapter.DrawerItemsAdapter;
 import com.adityagupta.router615dir.data.DrawerItemData;
 import com.adityagupta.router615dir.fragments.ConnectedDeviceFragment;
 import com.adityagupta.router615dir.fragments.QOSFragment;
+import com.adityagupta.router615dir.fragments.SettingsFragment;
 import com.adityagupta.router615dir.utils.Common;
 import com.adityagupta.router615dir.views.Drawer.AdityaDrawerToggle;
 import com.adityagupta.router615dir.views.Drawer.AdityaNavigationLayout;
@@ -52,7 +53,7 @@ public class ParentActivity extends AppCompatActivity {
         list.add(new DrawerItemData(Common.drawableToBitmap(getResources().getDrawable(R.drawable.nav_drawer_devices)), "Devices", "Connected Devices", ConnectedDeviceFragment.newInstance()));
         list.add(new DrawerItemData(Common.drawableToBitmap(getResources().getDrawable(R.drawable.nav_drawer_qos)), "QOS", "QOS", QOSFragment.newInstance()));
 //        list.add(new DrawerItemData(Common.drawableToBitmap(getResources().getDrawable(R.drawable.nav_drawer_homepage)), "MyBookings", "My Bookings", QOSFragment.newInstance()));
-//        list.add(new DrawerItemData(Common.drawableToBitmap(getResources().getDrawable(R.drawable.nav_drawer_homepage)), "Tips", "Tips", QOSFragment.newInstance()));
+        list.add(new DrawerItemData(Common.drawableToBitmap(getResources().getDrawable(R.drawable.nav_drawer_settings)), "Settings", "Settings", SettingsFragment.newInstance()));
 
         mRecyclerView.setAdapter(null);
         mAdapter = new DrawerItemsAdapter(this, list, (AdityaNavigationLayout) findViewById(R.id.drawer), getSupportFragmentManager(), getSupportActionBar());

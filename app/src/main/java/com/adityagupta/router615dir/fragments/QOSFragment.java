@@ -1,6 +1,8 @@
 package com.adityagupta.router615dir.fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -66,7 +68,7 @@ public class QOSFragment extends Fragment {
                     public void onTaskFailed() {
 
                     }
-                }));
+                },getContext()));
                 webView.loadUrl(LOGIN_URL);
             }
         });
@@ -88,7 +90,7 @@ public class QOSFragment extends Fragment {
                     public void onTaskFailed() {
 
                     }
-                }));
+                },getContext()));
                 webView.loadUrl(LOGIN_URL);
             }
         });
@@ -110,7 +112,7 @@ public class QOSFragment extends Fragment {
                     public void onTaskFailed() {
 
                     }
-                }));
+                },getContext()));
                 webView.loadUrl(LOGIN_URL);
             }
         });

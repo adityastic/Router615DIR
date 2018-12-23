@@ -1,5 +1,8 @@
 package com.adityagupta.router615dir.webviewClients;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.webkit.ValueCallback;
 import android.webkit.WebView;
@@ -34,19 +37,24 @@ public class QOSWebviewClient extends WebViewClient {
     private TaskDone taskDone;
 
     private WebViewTester tester;
+    private Context context;
 
-    public QOSWebviewClient(int selected, TaskDone taskDone) {
+    public QOSWebviewClient(int selected, TaskDone taskDone,Context context) {
         tester = new WebViewTester();
         this.selected = selected;
         this.complete = false;
         this.loadtime = 0;
         this.taskDone = taskDone;
+        this.context = context;
     }
-
+    SharedPreferences shared;
     @Override
     public void onPageFinished(final WebView view, String url) {
         tester.init(view);
         Log.e("URL", url);
+
+        shared = PreferenceManager.getDefaultSharedPreferences(context);
+
         if (LOGIN_URL.equals(url)) {
             view.postDelayed(new Runnable() {
                 @Override
@@ -141,9 +149,9 @@ public class QOSWebviewClient extends WebViewClient {
                 tester.setValueForItemWithName("dstip", "0.0.0.0");
                 tester.setValueForItemWithName("dstnetmask", "0.0.0.0");
                 tester.setValueForItemWithName("uprateFloor", "1");
-                tester.setValueForItemWithName("uprateCeiling", "400");
+                tester.setValueForItemWithName("uprateCeiling", shared.getString("mbup","0"));
                 tester.setValueForItemWithName("downrateFloor", "1");
-                tester.setValueForItemWithName("downrateCeiling", "6144");
+                tester.setValueForItemWithName("downrateCeiling", shared.getString("mbdown","0"));
                 tester.clickOnItemWithName("addRule");
                 taskDone.onTaskComplete();
             }
@@ -166,9 +174,9 @@ public class QOSWebviewClient extends WebViewClient {
                 tester.setValueForItemWithName("dstip", "0.0.0.0");
                 tester.setValueForItemWithName("dstnetmask", "0.0.0.0");
                 tester.setValueForItemWithName("uprateFloor", "1");
-                tester.setValueForItemWithName("uprateCeiling", "400");
+                tester.setValueForItemWithName("uprateCeiling", shared.getString("tvup","0"));
                 tester.setValueForItemWithName("downrateFloor", "1");
-                tester.setValueForItemWithName("downrateCeiling", "6144");
+                tester.setValueForItemWithName("downrateCeiling", shared.getString("tvdown","0"));
                 tester.clickOnItemWithName("addRule");
                 taskDone.onTaskComplete();
             }
@@ -247,11 +255,11 @@ public class QOSWebviewClient extends WebViewClient {
 
     public interface TaskDone
     {
-        public void onTaskComplete();
-        public void onTaskFailed();
+        void onTaskComplete();
+        void onTaskFailed();
     }
     public interface onCheckRuleExists
     {
-        public void yes();
+        void yes();
     }
 }

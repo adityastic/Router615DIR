@@ -69,7 +69,7 @@ public class DrawerItemsAdapter extends RecyclerView.Adapter<DrawerItemsAdapter.
             }
         });
 
-        if (data.actiontitle.equals("Tips")) {
+        if (data.actiontitle.equals("Settings")) {
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
             params.topMargin = 56;
             holder.itemView.setLayoutParams(params);
