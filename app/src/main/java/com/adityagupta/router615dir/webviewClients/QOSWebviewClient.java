@@ -8,13 +8,11 @@ import android.webkit.ValueCallback;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.adityagupta.router615dir.WebViewTester;
-
 public class QOSWebviewClient extends WebViewClient {
 
     public static final String LOGIN_URL = "http://192.168.0.1/login.htm";
     public static final String INDEX_URL = "http://192.168.0.1/index.htm";
-    public static final String WLAN_BASIC_URL = "http://192.168.0.1/wlan_basic.htm";
+//    public static final String WLAN_BASIC_URL = "http://192.168.0.1/wlan_basic.htm";
     public static final String TRAFFIC_CONTROL_URL = "http://192.168.0.1/ipqostc_gen_ap.htm";
 
     public static final String Predefined_FUNC = "(function() { " +
@@ -28,7 +26,7 @@ public class QOSWebviewClient extends WebViewClient {
 
     private static final int PLAYING_RULE = 1;
     private static final int TV_RULE = 2;
-    private static final int CLEARALL = 3;
+    private static final int CLEAR_ALL = 3;
 
     private int selected = 0;
     private boolean complete;
@@ -36,11 +34,11 @@ public class QOSWebviewClient extends WebViewClient {
 
     private TaskDone taskDone;
 
-    private WebViewTester tester;
+    private BaseWebViewClient tester;
     private Context context;
 
     public QOSWebviewClient(int selected, TaskDone taskDone,Context context) {
-        tester = new WebViewTester();
+        tester = new BaseWebViewClient();
         this.selected = selected;
         this.complete = false;
         this.loadtime = 0;
@@ -110,7 +108,7 @@ public class QOSWebviewClient extends WebViewClient {
                                 setTrafficRuleto32(view);
                         }
                         break;
-                    case CLEARALL:
+                    case CLEAR_ALL:
                         if (INDEX_URL.equals(url)) {
                             view.postDelayed(new Runnable() {
                                 @Override
@@ -146,6 +144,7 @@ public class QOSWebviewClient extends WebViewClient {
                 complete = true;
                 tester.setValueForItemWithName("srcip", "192.168.0.0");
                 tester.setValueForItemWithName("srcnetmask", "255.255.255.192");
+//                tester.setValueForItemWithName("srcnetmask", "192.168.0.64");
                 tester.setValueForItemWithName("dstip", "0.0.0.0");
                 tester.setValueForItemWithName("dstnetmask", "0.0.0.0");
                 tester.setValueForItemWithName("uprateFloor", "1");

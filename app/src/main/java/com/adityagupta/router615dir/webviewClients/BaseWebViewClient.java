@@ -1,4 +1,4 @@
-package com.adityagupta.router615dir;
+package com.adityagupta.router615dir.webviewClients;
 
 import android.util.Log;
 import android.webkit.ValueCallback;
@@ -7,7 +7,7 @@ import android.webkit.WebView;
 /**
  * edited by aditya on 18.06.2018.
  */
-public class WebViewTester {
+public class BaseWebViewClient {
 
     public static final String SUCCESS = "success";
 
@@ -360,6 +360,7 @@ public class WebViewTester {
         functionScript.append(SUCCESS);
         functionScript.append("'; })();");
 
+        Log.e("JS", functionScript.toString() + "");
         return functionScript.toString();
     }
 

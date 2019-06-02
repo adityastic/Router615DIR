@@ -5,8 +5,6 @@ import android.webkit.ValueCallback;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.adityagupta.router615dir.WebViewTester;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -15,14 +13,14 @@ public class ConnectedWebviewClient extends WebViewClient {
     public static final String INDEX_URL = "http://192.168.0.1/index.htm";
     public static final String CONNECTEDDEVICES_URL = "http://192.168.0.1/dhcptbl.htm";
 
-    private WebViewTester tester;
+    private BaseWebViewClient tester;
 
     private boolean complete;
 
     private TaskDone taskDone;
 
     public ConnectedWebviewClient(TaskDone taskDone) {
-        tester = new WebViewTester();
+        tester = new BaseWebViewClient();
         this.complete = false;
         this.taskDone = taskDone;
     }

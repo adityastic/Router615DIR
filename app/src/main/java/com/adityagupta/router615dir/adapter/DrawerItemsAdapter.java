@@ -1,12 +1,13 @@
 package com.adityagupta.router615dir.adapter;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import android.graphics.drawable.Drawable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.ActionBar;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.adityagupta.router615dir.R;
 import com.adityagupta.router615dir.data.DrawerItemData;
+import com.adityagupta.router615dir.utils.Common;
 import com.adityagupta.router615dir.views.Drawer.AdityaNavigationLayout;
 
 import java.util.List;
@@ -96,6 +98,11 @@ public class DrawerItemsAdapter extends RecyclerView.Adapter<DrawerItemsAdapter.
         return list.size();
     }
 
+    public void start() {
+        actionBar.setTitle(list.get(0).actiontitle);
+        fragmentManager.beginTransaction().replace(R.id.frag_container, list.get(0).fragment).addToBackStack(null).commit();
+    }
+
     public class DrawerItemHolder extends RecyclerView.ViewHolder {
 
         ImageView icon;
@@ -108,6 +115,10 @@ public class DrawerItemsAdapter extends RecyclerView.Adapter<DrawerItemsAdapter.
             title = itemView.findViewById(R.id.title);
             bg_color = itemView.findViewById(R.id.bg_color);
         }
+    }
 
+    public void changeIcon(int index, Drawable drawable){
+        list.get(index).setImage(Common.drawableToBitmap(drawable));
+        notifyDataSetChanged();
     }
 }

@@ -1,7 +1,7 @@
 package com.adityagupta.router615dir.data;
 
 import android.graphics.Bitmap;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 public class DrawerItemData {
 
@@ -13,6 +13,38 @@ public class DrawerItemData {
         this.image = image;
         this.title = title;
         this.actiontitle = actiontitle;
+        this.fragment = fragment;
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getActiontitle() {
+        return actiontitle;
+    }
+
+    public void setActiontitle(String actiontitle) {
+        this.actiontitle = actiontitle;
+    }
+
+    public Fragment getFragment() {
+        return fragment;
+    }
+
+    public void setFragment(Fragment fragment) {
         this.fragment = fragment;
     }
 }

@@ -2,13 +2,12 @@ package com.adityagupta.router615dir.fragments;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import android.webkit.CookieManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import com.adityagupta.router615dir.webChromeClients.BaseChromeClient;
 import com.adityagupta.router615dir.R;
 import com.adityagupta.router615dir.adapter.ConnectedDevicesAdapter;
 import com.adityagupta.router615dir.data.ConnectedDevicesData;
@@ -26,7 +26,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static com.adityagupta.router615dir.webviewClients.ConnectedWebviewClient.LOGIN_URL;
 
@@ -132,6 +131,7 @@ public class ConnectedDeviceFragment extends Fragment {
                 mSwipeRefresh.setRefreshing(false);
             }
         }));
+        webView.setWebChromeClient(new BaseChromeClient(getContext()));
         webView.loadUrl(LOGIN_URL);
 
     }

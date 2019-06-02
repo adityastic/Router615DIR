@@ -1,10 +1,10 @@
 package com.adityagupta.router615dir;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +14,7 @@ import com.adityagupta.router615dir.data.DrawerItemData;
 import com.adityagupta.router615dir.fragments.ConnectedDeviceFragment;
 import com.adityagupta.router615dir.fragments.QOSFragment;
 import com.adityagupta.router615dir.fragments.SettingsFragment;
+import com.adityagupta.router615dir.fragments.StatusDeviceFragment;
 import com.adityagupta.router615dir.utils.Common;
 import com.adityagupta.router615dir.views.Drawer.AdityaDrawerToggle;
 import com.adityagupta.router615dir.views.Drawer.AdityaNavigationLayout;
@@ -28,7 +29,7 @@ public class ParentActivity extends AppCompatActivity {
     AdityaNavigationLayout drawer;
 
     RecyclerView mRecyclerView;
-    RecyclerView.Adapter mAdapter;
+    DrawerItemsAdapter mAdapter;
 
     boolean backflag = false;
 
@@ -50,6 +51,15 @@ public class ParentActivity extends AppCompatActivity {
         mAdapter = null;
 
         list = new ArrayList<>();
+        list.add(new DrawerItemData(Common.drawableToBitmap(getResources().getDrawable(R.drawable.nav_drawer_status_dead)), "Status", "Status", StatusDeviceFragment.newInstance(new StatusDeviceFragment.ChangeDrawerIcon() {
+            @Override
+            public void changeIcon(boolean yesorno) {
+                if(yesorno)
+                    mAdapter.changeIcon(0,getResources().getDrawable(R.drawable.nav_drawer_status_happy));
+                else
+                    mAdapter.changeIcon(0,getResources().getDrawable(R.drawable.nav_drawer_status_dead));
+            }
+        })));
         list.add(new DrawerItemData(Common.drawableToBitmap(getResources().getDrawable(R.drawable.nav_drawer_devices)), "Devices", "Connected Devices", ConnectedDeviceFragment.newInstance()));
         list.add(new DrawerItemData(Common.drawableToBitmap(getResources().getDrawable(R.drawable.nav_drawer_qos)), "QOS", "QOS", QOSFragment.newInstance()));
 //        list.add(new DrawerItemData(Common.drawableToBitmap(getResources().getDrawable(R.drawable.nav_drawer_homepage)), "MyBookings", "My Bookings", QOSFragment.newInstance()));
@@ -98,8 +108,7 @@ public class ParentActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         createDrawerItems();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, ConnectedDeviceFragment.newInstance()).addToBackStack(null).commit();
-        getSupportActionBar().setTitle("Connected Devices");
+        mAdapter.start();
 
         //drawer.setSelection(1);
     }
