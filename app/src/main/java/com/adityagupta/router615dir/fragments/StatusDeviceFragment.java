@@ -108,7 +108,7 @@ public class StatusDeviceFragment extends Fragment {
             @Override
             public void onTaskComplete(String ip) {
                 Log.e("IP",ip);
-                if (ip.equals("\"0.0.0.0\"")) {
+                if (ip.equals("\"0.0.0.0\"") || ip.contains("192.168.")) {
                     noInternet();
                     changeDrawerIcon.changeIcon(false);
                 } else {
