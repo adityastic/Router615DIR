@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,19 +26,19 @@ import static com.adityagupta.router615dir.webviewClients.StatusWebviewClient.LO
 
 public class StatusDeviceFragment extends Fragment {
 
-    SwipeRefreshLayout mSwipeRefresh;
-    TextView title, subtitle;
-    SquareImageView image;
+    private SwipeRefreshLayout mSwipeRefresh;
+    private TextView title, subtitle;
+    private SquareImageView image;
 
-    ChangeDrawerIcon changeDrawerIcon;
+    private ChangeDrawerIcon changeDrawerIcon;
 
-    WebView webView;
+    private WebView webView;
 
     public StatusDeviceFragment() {
     }
 
     @SuppressLint("ValidFragment")
-    public StatusDeviceFragment(ChangeDrawerIcon changeDrawerIcon) {
+    private StatusDeviceFragment(ChangeDrawerIcon changeDrawerIcon) {
         this.changeDrawerIcon = changeDrawerIcon;
     }
 
@@ -78,7 +79,7 @@ public class StatusDeviceFragment extends Fragment {
     }
 
     @SuppressLint("SetTextI18n")
-    void noInternet() {
+    private void noInternet() {
         Log.e("NoInternet","Called");
         image.setImageDrawable(getResources().getDrawable(R.drawable.emoji_status_dead));
         title.setText("Internet Not Available!!");
@@ -86,7 +87,7 @@ public class StatusDeviceFragment extends Fragment {
     }
 
     @SuppressLint("SetTextI18n")
-    void gotInternet() {
+    private void gotInternet() {
         Log.e("GotInternet","Called");
         image.setImageDrawable(getResources().getDrawable(R.drawable.emoji_status_connected));
         title.setText("Internet Available!!");
